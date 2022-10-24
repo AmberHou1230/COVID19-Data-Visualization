@@ -29,7 +29,9 @@ df = pd.read_csv(dataset_url)
 df.head()
 df.tail()
 ```
-![First 5 rows of the dataframe]((https://github.com/AmberHou1230/COVID19-Data-Visualization/blob/main/dffirst5row.png))
+![First 5 rows of the dataframe](dffirst5rows.png)
+
+![Law 5 rows of the dataframe](pic1.png)
 
 - Preprocessing 
 df = df[df.Confirmed > 0]
