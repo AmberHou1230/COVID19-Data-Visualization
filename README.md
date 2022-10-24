@@ -29,7 +29,7 @@ df = pd.read_csv(dataset_url)
 df.head()
 df.tail()
 ```
-![Descriptive/Alt text here](pic1.jpg)
+![First 5 rows of the dataframe]((https://github.com/AmberHou1230/COVID19-Data-Visualization/blob/main/dffirst5row.png))
 
 - Preprocessing 
 df = df[df.Confirmed > 0]
