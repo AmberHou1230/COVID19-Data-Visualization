@@ -20,13 +20,16 @@ import matplotlib.pyplot as plt
 print('modules are imported')
 ```
 - Loading the dataset 
+```
 dataset_url = 'http://raw.githubusercontent.com/datasets/covid-19/master/data/countries-aggregated.csv'
 df = pd.read_csv(dataset_url)
-
+```
 - Check the dataframe df
+```
 df.head()
 df.tail()
-insert pictures here
+```
+![Descriptive/Alt text here](pic1.jpg)
 
 - Preprocessing 
 df = df[df.Confirmed > 0]
