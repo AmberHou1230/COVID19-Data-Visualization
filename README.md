@@ -29,16 +29,21 @@ df = pd.read_csv(dataset_url)
 df.head()
 df.tail()
 ```
-![First 5 rows of the dataframe](dffirst5rows.png)
+![First 5 rows of the dataframe](dffirst5row.png)
+
+Here we can see the first 5 rows of the dataframe.
 
 ![Law 5 rows of the dataframe](pic1.png)
 
-- Preprocessing 
+Here we can see the last 5 rows of the dataframe.
+
+- Preprocessing
+``` 
+# add some comments here 
 df = df[df.Confirmed > 0]
 df.head()
+```
 
-A picture is worth a thousand words.
-![Descriptive/Alt text here](https://cdn.glitch.com/worldscollide2.jpg)
 
 See data realted to Italy as an example
 -----------------------
