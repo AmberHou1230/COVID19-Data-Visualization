@@ -39,12 +39,18 @@ Here we can see the last 5 rows of the dataframe.
 
 - Preprocessing
 ``` 
-# add some comments here 
+# We only want values that are greaterf than zero
 df = df[df.Confirmed > 0]
 df.head()
 ```
 
+![Law 5 rows of the dataframe](preprocessing.png)
 
-See data realted to Italy as an example
+Drawing Insights from Italy's COVID19 Data
 -----------------------
+```
+df[df.Country == 'Italy']
+```
+![Italy's COVID19 Data](italydf.png)
 
+Now we have a dataframe of 807 rows x 5 columns, showing Italy's COVID19 data
