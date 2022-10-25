@@ -74,3 +74,26 @@ fig.update_layout(title_text = 'Global Death of COVID19')
 fig.show()
 ```
 ![Global Deaths of COVID19](global death.png)
+
+Maximum Infection Rate in Each Country
+-------------------------------
+
+An important stats that the CDC keeps track of is the maximum infection rate. I was wondering if I could find a way to visulizate it. Maximum infection rate is the maximum number of newly infected cases over 24 hours. I was particularly interested in finding out more about this stats in China where it stayed the epicenter of the pandemic for an extended period of time. So here I started with extracting data on China from the dataset. 
+
+```
+df_china = df[df.Country == 'China'] # I want the rows where Country == China 
+df_china.head()
+```
+![Check the first 5 rows to see what it has](chinaConfirmedCases.png)
+
+then I selected the columns I needed for calculating the Maximum Infection Rates
+```
+df_china = df_china[['Date', 'Confirmed']]
+df_china.head() 
+df_china['Infection Rate'] = df_china['Confirmed'].diff()
+df_china.head()
+px.line(df_china, x = 'Date', y = ['Confirmed','Infection Rate'])
+```
+
+![Infection Rates by date](chinaInfectionRate.png)
+The blue line is the number of confirmed cases, and the red line is infection rate
