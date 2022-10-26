@@ -46,15 +46,6 @@ df.head()
 
 ![Law 5 rows of the dataframe](preprocessing.png)
 
-Drawing Insights from Italy's COVID19 Data
------------------------
-```
-df[df.Country == 'Italy']
-```
-![Italy's COVID19 Data](italydf.png)
-
-Now we have a dataframe of 807 rows x 5 columns, showing Italy's COVID19 data
-
 The Global Spread of COVID19
 -----------------
 ```
@@ -127,4 +118,209 @@ px.bar(df_MIR, x='Country', y='Max Infection Rate', color='Country'
 
 ![MIRs](MIRs.png)
 ![global MIRs](global MIRs.png)
+
+Drawing Insights from Italy's COVID19 Data
+-----------------------
+```
+df[df.Country == 'Italy']
+```
+![Italy's COVID19 Data](italydf.png)
+
+Now we have a dataframe of 807 rows x 5 columns, showing Italy's COVID19 data. Let's calculate the infection rates in Italy and visualize them. We also want to add a vertical line to observe COVID19 data from before and after the national lockdown in Italy. 
+```
+# Lets check the dataframe
+df_italy.head()
+# let's calculate the infection rate in Italy
+df_italy['Infection Rate'] = df_italy.Confirmed.diff()
+# now let's do the visualization
+fig = px.line(df_italy, x='Date', y='Infection Rate', title = 'Before and After Lockdown in Italy')
+fig.show()
+# now we want to add a vertical line to the line chart to show before and after lockdown
+fig.add_shape(
+    dict(
+    type = 'line', 
+    x0 = italy_lockdown_start_date, 
+    y0 = 0,
+    x1 = italy_lockdown_start_date, 
+    y1 = df_italy['Infection Rate'].max(),
+    line = dict(color = 'red', width = 2)
+    )
+)
+# add an annotation that describes what this line represent
+fig.add_annotation(
+    dict(
+    x = italy_lockdown_start_date,
+    y = df_italy['Infection Rate'].max(),
+    text = 'starting date of the lockdown'
+    )
+)
+
+# now add a line that represents one month after the start of lockdown
+fig.add_shape(
+    dict(
+    type = 'line', 
+    x0 = italy_lockdown_start_date, 
+    y0 = 0,
+    x1 = italy_lockdown_start_date, 
+    y1 = df_italy['Infection Rate'].max(),
+    line = dict(color = 'red', width = 2)
+    )
+)
+# add an annotation that describes what this line represent
+fig.add_annotation(
+    dict(
+    x = italy_lockdown_start_date,
+    y = df_italy['Infection Rate'].max(),
+    text = 'starting date of the lockdown'
+    )
+)
+fig.add_shape(
+    dict(
+    type = 'line', 
+    x0 = italy_lockdown_a_month_later, 
+    y0 = 0,
+    x1 = italy_lockdown_a_month_later, 
+    y1 = df_italy['Infection Rate'].max(),
+    line = dict(color = 'orange', width = 2)
+    )
+)
+# add an annotation that describes what this line represent
+fig.add_annotation(
+    dict(
+    x = italy_lockdown_a_month_later,
+    y = df_italy['Infection Rate'].max(),
+    text = 'a month later'
+    )
+)
+```
+
+
+
+```
+# Part 5: Deaths Rate before and after national lockdown in Italy
+# Let's see how national lockdowns impact COVID19 death rate in Italy
+df_italy.head()
+# let's calculate the deaths rates
+df_italy['Deaths Rate'] = df_italy.Deaths.diff() # you will see a warning message but just go on
+# let's check the dataframe again
+df_italy.head()
+# now let's plot a line chart to compare COVID19 national lockdowns on spread of the virus
+# and deaths rate
+fig = px.line(df_italy, x = 'Date', y = ['Infection Rate', 'Deaths Rate'])
+fig.show()
+
+# let's normalize the columns 
+# this means that we want every y value to be 0 and 1, 
+# so we have to divide every y value by the maximum value of y 
+df_italy['Infection Rate'] = df_italy['Infection Rate']/df_italy['Infection Rate'].max()
+df_italy['Deaths Rate'] = df_italy['Deaths Rate']/df_italy['Deaths Rate'].max()
+# again, you will see a "SettingWithCopyWarning". That is fine just keep going
+
+# let's plot the line chart again
+fig = px.line(df_italy, x = 'Date', y = ['Infectio Rate', 'Deaths Rate'])
+fig.show()
+
+# add the vertical lines again to show the impact of lockdown
+# i wrote the following code for adding 2 vertical lines myself. check later for error
+# conclusion: lockdown was effective 
+fig.add_shape(
+    dict(
+    type = 'line', 
+    x0 = italy_lockdown_a_month_later, 
+    y0 = 0,
+    x1 = italy_lockdown_a_month_later, 
+    y1 = df_italy['Infection Rate'].max(),
+    line = dict(color = 'orange', width = 2)
+    )
+)
+# add an annotation that describes what this line represent
+fig.add_annotation(
+    dict(
+    x = italy_lockdown_a_month_later,
+    y = df_italy['Infection Rate'].max(),
+    text = 'a month later'
+    )
+)
+
+fig.add_shape(
+    dict(
+    type = 'line', 
+    x0 = italy_lockdown_start_date, 
+    y0 = 0,
+    x1 = italy_lockdown_start_date, 
+    y1 = df_italy['Infection Rate'].max(),
+    line = dict(color = 'black', width = 2)
+    )
+)
+# add an annotation that describes what this line represent
+fig.add_annotation(
+    dict(
+    x = italy_lockdown_start_date,
+    y = df_italy['Infection Rate'].max(),
+    text = 'starting date of the lockdown'
+    )
+)
+
+
+```
+
+
+COVID19 pandemic lockdown in Germany
+---------------------------
+```
+# Part 6: additional exercise, COVID19 pandemic lockdown in Germany
+# lockdown was started in Freiburg, Baden-Wurttemberg and Bavaria on 20 March 2020.
+# Three days later, it was expanded to the whole Germany
+Germany_lockdown_start_date = '2020-03-23'
+Germany_lockdown_a_month_later = '2020-04-23'
+
+# Let's select the data reltaed to Germany and check the dataframe
+df_germany = df[df.Country == 'Germany']
+df_germany.head()
+
+df_germany['Infection Rate'] = df_germany.Confirmed.diff()
+df_germany['Deaths Rate'] = df_germany.Deaths.diff()
+df_germany.head()
+
+# Let's do some scalling and plot the line chart (normalization)
+df_germany['Infection Rate'] = df_germany['Infection Rate']/df_germany['Infection Rate'].max()
+df_germany['Deaths Rate'] = df_germany['Deaths Rate']/df_germany['Deaths Rate'].max()
+
+fig = px.line(df_germany, x = 'Date', y = ['Infection Rate', 'Deaths Rate'])
+fig.add_shape(
+    dict(
+    type = "line",
+    x0 = Germany_lockdown_start_date,
+    y0 = 0,
+    x1 = Germany_lockdown_start_date,
+    y1 = df_germany['Infection Rate'].max(),
+    line = dict(color = 'black', width = 2)
+    )
+)
+
+fig.add_annotation(
+    dict(
+    x = Germany_lockdown_start_date,
+    y = df_germany['Infection Rate'].max(),
+    text = 'starting date of the lockdown'
+    )
+)
+fig.add_shape(
+    dict(
+    type = "line",
+    x0 = Germany_lockdown_a_month_later,
+    y0 = 0,
+    x1 = Germany_lockdown_a_month_later,
+    y1 = df_germany['Infection Rate'].max(),
+    line = dict(color = 'yellow', width = 2)
+    )
+)
+fig.add_annotation(
+    dict(
+    x = Germany_lockdown_a_month_later,
+    y = df_germany['Infection Rate'].max(),
+    text = 'a month later'
+    )
+)
+```
 
