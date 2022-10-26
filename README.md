@@ -96,6 +96,7 @@ px.line(df_china, x = 'Date', y = ['Confirmed','Infection Rate'])
 ```
 
 ![Infection Rates by date](chinaInfectionRate.png)
+
 The blue line is the number of confirmed cases, and the red line is infection rate
 
 So what was the maximum infection rate in China？
