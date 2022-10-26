@@ -105,7 +105,25 @@ df_china['Infection Rate'].max()
 
 The maximum number of newly confirmed COVID19 cases in one day in China was **77402**. Wow. 
 
+let's calculate the max infection rates for all of the countries and visualize them
+```
+df.head()
+countries = list(df['[Country'].unique()) # the unique() method will return unique values of the column Country
+max_infection_rates = [] # this will add a column to the dataframe
+for c in countries :
+    MIR = df[df.Country == c].Confirmed.diff().max()
+    max_infection_rates.append(MIR)
+print(max_infection_rates) # check output, this should give you a huge list of numbers
+# lets create a new dataframe
+df_MIR = pd.DataFrame()
+df_MIR['Country'] = countries
+df_MIR['Max Infection Rate'] = max_infection_rates
+df_MIR.head()
+# plot the barchart: max infection rate of each country
+px.bar(df_MIR, x='Country', y='Max Infection Rate', color='Country'
+        , title='Global Maximum Infection Rate', log_y = True)
+```
 
+![MIRs](MIRs.png)
+![global MIRs](global MIRs.png)
 
-
-maximum number of newly confirmed COIVD19 cases in a day in China? 
