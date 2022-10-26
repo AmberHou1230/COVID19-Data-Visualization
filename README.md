@@ -97,3 +97,15 @@ px.line(df_china, x = 'Date', y = ['Confirmed','Infection Rate'])
 
 ![Infection Rates by date](chinaInfectionRate.png)
 The blue line is the number of confirmed cases, and the red line is infection rate
+
+So what was the maximum infection rate in China？
+```
+df_china['Infection Rate'].max()
+```
+
+The maximum number of newly confirmed COVID19 cases in one day in China was **77402**. Wow. 
+
+
+
+
+maximum number of newly confirmed COIVD19 cases in a day in China? 
