@@ -117,7 +117,7 @@ px.bar(df_MIR, x='Country', y='Max Infection Rate', color='Country'
 ```
 
 ![MIRs](MIRs.png)
-![global MIRs](global MIRs.png)
+![global MIRs](global&#32;MIRs.png)
 
 Drawing Insights from Italy's COVID19 Data
 -----------------------
