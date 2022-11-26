@@ -54,7 +54,7 @@ fig = px.choropleth(df, locations = 'Country', locationmode = 'country names', c
 fig.update_layout(title_text = 'Global Spread') # add a title to the map/graph using the title_text argument
 fig.show()
 ```
-![Global Spread of COVID19](global spread.png)
+![Global Spread of COVID19](global&#32;spread.png)
 Here we can see a map of the whole world with countries highlighted in different colors based on their number of confirmed cases. We can use the slide to select a date and the map will change accordingly. 
 
 Similarly, we can also visualize global deaths of COVID19. 
@@ -64,7 +64,7 @@ fig = px.choropleth(df, locations = 'Country', locationmode = 'country names', c
 fig.update_layout(title_text = 'Global Death of COVID19')
 fig.show()
 ```
-![Global Deaths of COVID19]("global death.png")
+![Global Deaths of COVID19](global&#32;death.png)
 
 Maximum Infection Rate in Each Country
 -------------------------------
