@@ -64,7 +64,7 @@ fig = px.choropleth(df, locations = 'Country', locationmode = 'country names', c
 fig.update_layout(title_text = 'Global Death of COVID19')
 fig.show()
 ```
-![Global Deaths of COVID19](global death.png)
+![Global Deaths of COVID19]("global death.png")
 
 Maximum Infection Rate in Each Country
 -------------------------------
